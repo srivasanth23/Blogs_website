@@ -1,0 +1,33 @@
+.ul-container {
+  list-style-type: none;
+  flex-wrap: wrap;
+}
+
+.l-elem {
+  border: solid 2px grey;
+  padding: 1rem;
+  border-radius: 10px;
+  border-top-left-radius: 0;
+  border-right-color: var(--primary);
+  border-right-width: 5px;
+  margin: 15px;
+  height: 180px;
+  width: 360px;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.l-elem:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.summary-elem {
+  overflow-y: hidden;
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+
