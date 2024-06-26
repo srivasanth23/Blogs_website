@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { fetchBlogs } from "../../utils/mockAPI";
 import { Link } from "react-router-dom";
 import Header from "../Header";
 import "./index.css";
@@ -8,7 +7,18 @@ const BlogsList = () => {
   const [blogs, setBlogs] = React.useState([]);
 
   useEffect(() => {
-    setBlogs(fetchBlogs());
+    const url = "https://blogs-website-3k62.onrender.com/";
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+    // setBlogs(fetchData());
   }, []);
 
   const summaryShortner = (summary) => {

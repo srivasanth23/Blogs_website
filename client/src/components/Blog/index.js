@@ -1,16 +1,10 @@
-// BlogPost.js
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { fetchBlogByID } from "../../utils/mockAPI";
 
 const Blog = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
 
-  useEffect(() => {
-    const fetchedPost = fetchBlogByID(parseInt(id, 10));
-    setPost(fetchedPost);
-  }, [id]);
 
   return (
     <div>

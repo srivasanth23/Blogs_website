@@ -6,8 +6,6 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const moment = require('moment');
 
-
-const date = new Date();
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -39,7 +37,7 @@ mongoose
 app.get("/blogs", async (req, res) => {
   try {
     const posts = await Blogs.find();
-    res.json(posts);
+    res.status(201).json(posts);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -50,7 +48,7 @@ app.get("/blogs/:id", async (req, res) => {
   try {
     const post = await Blogs.findById(req.params.id);
     if (!post) return res.status(404).json({ message: "Post not found" });
-    res.json(post);
+    res.status(201).json(post);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -89,7 +87,7 @@ app.put('/blogs/:id', async (req, res) => {
         post.publicationDate = formattedDate;
 
         const updatedPost = await post.save();
-        res.json(updatedPost);
+        res.status(201).json(updatedPost);
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
@@ -102,7 +100,7 @@ app.delete('/blogs/:id', async (req, res) => {
         if (!post) return res.status(404).json({ message: 'Post not found' });
 
         await post.deleteOne();
-        res.json({ message: 'Post deleted' });
+        res.status(201).json({ message: 'Post deleted' });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
