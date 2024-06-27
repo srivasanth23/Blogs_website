@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -13,9 +13,9 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepContent from "@mui/material/StepContent";
 
-const BlogEdit = ({ opened, setOpened }) => {
+const DeleteBlog = ({ opened, setOpened }) => {
   const { id } = useParams();
-  const [count, setCount] = useState(0);
+  const navigate = useNavigate();
   const [blog, setBlogDetails] = useState({
     title: "",
     author: "",
@@ -39,19 +39,17 @@ const BlogEdit = ({ opened, setOpened }) => {
     fetchPost();
   }, [id]);
 
-  console.log(count);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     await fetch(`https://blogs-website-3k62.onrender.com/blogs/${id}`, {
-      method: "PUT",
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(blog),
     });
     setOpened(false);
-    setCount(0);
+    navigate("/");
   };
 
   const handleChange = (e) => {
@@ -78,7 +76,7 @@ const BlogEdit = ({ opened, setOpened }) => {
           }}
         >
           <Typography variant="h5" gutterBottom>
-            Edit Blog Post
+            Delete Blog Post
           </Typography>
           <Button onClick={() => setOpened(false)}>
             <IoCloseSharp size={25} />
@@ -135,17 +133,9 @@ const BlogEdit = ({ opened, setOpened }) => {
                     variant="contained"
                     color="primary"
                     fullWidth
-                    onClick={() => setCount((prev) => prev + 1)}
                   >
-                    Edit Post
+                    Delete Post
                   </Button>
-                  {count === 1 ? (
-                    <p style={{ padding: "5px", color: "#1f3e72" }}>
-                      It takes some time
-                    </p>
-                  ) : (
-                    <span></span>
-                  )}
                 </form>
               </Container>
             </StepContent>
@@ -172,4 +162,4 @@ const modalStyle = {
   maxHeight: "80vh",
 };
 
-export default BlogEdit;
+export default DeleteBlog;

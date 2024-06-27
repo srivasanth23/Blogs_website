@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../Header";
 import "./index.css";
@@ -7,9 +7,9 @@ import { FaPlusCircle } from "react-icons/fa";
 import AddBlog from "../AddBlog/index";
 
 const BlogsList = () => {
-  const [blogs, setBlogs] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
-  const [modelOpened, setmodelOpened] = React.useState(false);
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [modelOpened, setmodelOpened] = useState(false);
 
   //fetches blogs from API
   useEffect(() => {
@@ -65,10 +65,10 @@ const BlogsList = () => {
       {/* Added Just for good visual look, we can add more like Profile menu to header etc */}
       <div className="paddings innerWidth ">
         <div className="flexColEnd" style={{ paddingRight: "5rem" }}>
-          <div className="flexRowStart" onClick={() => handleOpen()}>
+          <button className="flexRowStart btnElem" onClick={() => handleOpen()}>
             <FaPlusCircle />
             <span style={{ paddingLeft: "5px" }}>Add new Blog</span>
-          </div>
+          </button>
         </div>
         <AddBlog
           opened={modelOpened}
